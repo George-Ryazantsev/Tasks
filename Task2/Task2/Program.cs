@@ -2,16 +2,17 @@
 {
     static void Main()
     {
-        Console.WriteLine("Введите первое целое число:");
-        string input1 = Console.ReadLine();
+      Console.WriteLine("Введите первое целое число:");
+      string input1 = Console.ReadLine();
 
-        Console.WriteLine("Введите второе целое число:");
-        string input2 = Console.ReadLine();
+      Console.WriteLine("Введите второе целое число:");
+      string input2 = Console.ReadLine();
         
         if (int.TryParse(input1, out int number1) && int.TryParse(input2, out int number2))
         {            
             int nod = NOD(number1, number2);
-            Console.WriteLine($"НОД чисел {number1} и {number2} = {nod}");            
+            Console.WriteLine($"НОД чисел {number1} и {number2} = {nod}"); 
+            
             int nok = NOK(number1, number2, nod);
             Console.WriteLine($"НОК чисел {number1} и {number2} = {nok}");
         }
@@ -19,8 +20,14 @@
         {
             Console.WriteLine(" Error: одно или оба введённых значения не являются целыми числами ");
         }
-    }    
-    // метод вычисления нод 
+    }
+
+    /// <summary>
+    /// Calculates the greatest common divisor (GCD) of two integers using the Euclidean algorithm.
+    /// </summary>
+    /// <param name="a">The first integer.</param>
+    /// <param name="b">The second integer.</param>
+    /// <returns>The greatest common divisor (GCD) of the two integers.</returns>
     static int NOD(int a, int b)
     {
         while (b != 0)
@@ -29,9 +36,17 @@
             b = a % b;
             a = z;
         }
+
         return Math.Abs(a);
-    }    
-    // метод вычисления нок
+    }
+
+    /// <summary>
+    /// Calculates the least common multiple (LCM) of two integers using the GCD.
+    /// </summary>
+    /// <param name="a">The first integer.</param>
+    /// <param name="b">The second integer.</param>
+    /// <param name="nod">The greatest common divisor (GCD) of the two integers.</param>
+    /// <returns>The least common multiple (LCM) of the two integers.</returns>
     static int NOK(int a, int b, int nod)
     {
         return Math.Abs(a * b) / nod;

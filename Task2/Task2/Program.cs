@@ -2,10 +2,10 @@
 {
     static void Main()
     {
-        Console.WriteLine("Введите первое целое число:");
+        Console.WriteLine($"Введите первое число в диапазоне от {int.MinValue} до {int.MaxValue}:");
         string input1 = Console.ReadLine();
 
-        Console.WriteLine("Введите второе целое число:");
+        Console.WriteLine($"Введите второе число в диапазоне от {int.MinValue} до {int.MaxValue}:");
         string input2 = Console.ReadLine();
 
         if (int.TryParse(input1, out int number1) && int.TryParse(input2, out int number2))
@@ -18,7 +18,7 @@
         }
         else
         {
-            Console.WriteLine(" Error: одно или оба введённых значения не являются целыми числами ");
+            Console.WriteLine(" Error: одно или оба введённых значения не являются целыми числами или превышают диапазон");
         }
     }
 

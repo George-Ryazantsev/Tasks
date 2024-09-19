@@ -6,7 +6,7 @@
         string mes = "end";
         do
         {
-            Console.WriteLine("Введите целое число:");
+            Console.WriteLine($"Введите целое число в диапазоне от {int.MinValue} до {int.MaxValue}:");
             input = Console.ReadLine();
 
             if (int.TryParse(input, out int number))
@@ -54,14 +54,7 @@
     /// <returns> true if the specified integer is even; otherwise, false. </returns>
     private static bool IsEvenNumber(int number)
     {
-        if (number % 2 == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return number % 2 == 0;
     }
 
     /// <summary>

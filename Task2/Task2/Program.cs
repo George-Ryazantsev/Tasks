@@ -18,7 +18,8 @@
         }
         else
         {
-            Console.WriteLine(" Error: одно или оба введённых значения не являются целыми числами или превышают диапазон");
+            Console.WriteLine(" Ошибка ввода!");
+            Environment.Exit(1);
         }
     }
 
@@ -49,6 +50,9 @@
     /// <returns>The least common multiple of the two integers.</returns>
     static int NOK(int a, int b, int nod)
     {
+        if (nod == 0)
+            return 0;
+
         return Math.Abs(a * b) / nod;
     }
 }

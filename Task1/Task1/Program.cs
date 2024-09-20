@@ -2,49 +2,39 @@
 {
     static void Main(string[] args)
     {
-        string input;
-        string mes = "end";
-        do
-        {
-            Console.WriteLine($"Введите целое число в диапазоне от {int.MinValue} до {int.MaxValue}:");
-            input = Console.ReadLine();
+        Console.WriteLine($"Введите целое число в диапазоне от {int.MinValue} до {int.MaxValue}:");
+        string input = Console.ReadLine();
 
-            if (int.TryParse(input, out int number))
+        if (int.TryParse(input, out int number))
+        {
+            if (IsEvenNumber(number))
             {
-                if (IsEvenNumber(number))
-                {
-                    Console.WriteLine($"Число {number} является четным");
-                }
-                else
-                {
-                    Console.WriteLine($"Число {number} является нечетным");
-                }
-                if (IsPrimeNumber(number))
-                {
-                    Console.WriteLine($"Число {number} является простым");
-                }
-                else
-                {
-                    if (number > 1)
-                    {
-                        Console.WriteLine($"Число {number} является составным");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
-                    }
-                }
+                Console.WriteLine($"Число {number} является четным");
             }
             else
             {
-                if (input == mes || string.IsNullOrEmpty(input))
-                    break;
-
-                Console.WriteLine(" Ошибка ввода!");
+                Console.WriteLine($"Число {number} является нечетным");
             }
-
-        } while (input != null || input != mes);
-
+            if (IsPrimeNumber(number))
+            {
+                Console.WriteLine($"Число {number} является простым");
+            }
+            else
+            {
+                if (number > 1)
+                {
+                    Console.WriteLine($"Число {number} является составным");
+                }
+                else
+                {
+                    Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine(" Ошибка ввода!");
+        }
     }
 
     /// <summary>

@@ -28,12 +28,14 @@
                 else
                 {
                     Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
+                    Environment.Exit(1);
                 }
             }
         }
         else
         {
-            Console.WriteLine(" Ошибка ввода!");
+            Console.WriteLine(" Ошибка ввода! Завершена работа программы");
+            Environment.Exit(1);
         }
     }
 

@@ -6,9 +6,9 @@
         string input = Console.ReadLine();
 
         try
-        {            
-            int number = checked(int.Parse(input)); 
-            
+        {
+            int number = checked(int.Parse(input));
+
             if (IsEvenNumber(number))
             {
                 Console.WriteLine($"Число {number} является четным");
@@ -31,7 +31,6 @@
                 else
                 {
                     Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
-                    Environment.Exit(1);
                 }
             }
         }
@@ -42,7 +41,7 @@
         }
         catch (FormatException)
         {
-            Console.WriteLine("Ошибка: введено нецелое число или неверный формат!");
+            Console.WriteLine("Error: введено нецелое число или неверный формат!");
             Environment.Exit(1);
         }
         catch (Exception ex)

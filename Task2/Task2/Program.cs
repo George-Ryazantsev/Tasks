@@ -2,23 +2,30 @@
 {
     static void Main()
     {
-        Console.WriteLine($"Введите первое число в диапазоне от {int.MinValue} до {int.MaxValue}:");
+        Console.WriteLine("Введите первое число: ");
         string input1 = Console.ReadLine();
 
-        Console.WriteLine($"Введите второе число в диапазоне от {int.MinValue} до {int.MaxValue}:");
+        Console.WriteLine("Введите второе число: ");
         string input2 = Console.ReadLine();
-
-        if (int.TryParse(input1, out int number1) && int.TryParse(input2, out int number2))
+        try
         {
+            int number1 = checked(int.Parse(input1));
+            int number2 = checked(int.Parse(input2));
+
             int nod = NOD(number1, number2);
             Console.WriteLine($"НОД чисел {number1} и {number2} = {nod}");
 
             int nok = NOK(number1, number2, nod);
             Console.WriteLine($"НОК чисел {number1} и {number2} = {nok}");
         }
-        else
+        catch (OverflowException)
         {
-            Console.WriteLine(" Ошибка ввода!");
+            Console.WriteLine("Error: превышение допустимого диапазона значений!");
+            Environment.Exit(1);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Ошибка: введены нецелые числа или неверный формат!");
             Environment.Exit(1);
         }
     }

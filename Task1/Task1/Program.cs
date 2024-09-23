@@ -2,11 +2,13 @@
 {
     static void Main(string[] args)
     {
-        Console.WriteLine($"Введите целое число в диапазоне от {int.MinValue} до {int.MaxValue}:");
+        Console.WriteLine("Введите число: ");
         string input = Console.ReadLine();
 
-        if (int.TryParse(input, out int number))
-        {
+        try
+        {            
+            int number = checked(int.Parse(input)); 
+            
             if (IsEvenNumber(number))
             {
                 Console.WriteLine($"Число {number} является четным");
@@ -15,6 +17,7 @@
             {
                 Console.WriteLine($"Число {number} является нечетным");
             }
+
             if (IsPrimeNumber(number))
             {
                 Console.WriteLine($"Число {number} является простым");
@@ -32,9 +35,19 @@
                 }
             }
         }
-        else
+        catch (OverflowException)
         {
-            Console.WriteLine(" Ошибка ввода! Завершена работа программы");
+            Console.WriteLine("Error: число превышает допустимый диапазон значений!");
+            Environment.Exit(1);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Ошибка: введено нецелое число или неверный формат!");
+            Environment.Exit(1);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
             Environment.Exit(1);
         }
     }

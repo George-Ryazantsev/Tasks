@@ -1,54 +1,53 @@
-﻿class Program
+﻿using System.Linq.Expressions;
+using System.Text.RegularExpressions;
+using Task1.Exeptions;
+
+class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("Введите число: ");
         string input = Console.ReadLine();
+        int number;
 
-        try
+        string pattern = @"^\d+$";
+        bool isOnlyDigits = Regex.IsMatch(input, pattern);
+
+        if (!isOnlyDigits)
         {
-            int number = checked(int.Parse(input));
+            throw new BadInputTypeException();
+        }
 
-            if (IsEvenNumber(number))
+        if (!int.TryParse(input, out number))
+        {
+            throw new OverFlowException();
+        }
+
+        if (IsEvenNumber(number))
+        {
+            Console.WriteLine($"Число {number} является четным");
+        }
+        else
+        {
+            Console.WriteLine($"Число {number} является нечетным");
+        }
+
+        if (IsPrimeNumber(number))
+        {
+            Console.WriteLine($"Число {number} является простым");
+        }
+        else
+        {
+            if (number > 1)
             {
-                Console.WriteLine($"Число {number} является четным");
+                Console.WriteLine($"Число {number} является составным");
             }
             else
             {
-                Console.WriteLine($"Число {number} является нечетным");
+                Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
             }
+        }
 
-            if (IsPrimeNumber(number))
-            {
-                Console.WriteLine($"Число {number} является простым");
-            }
-            else
-            {
-                if (number > 1)
-                {
-                    Console.WriteLine($"Число {number} является составным");
-                }
-                else
-                {
-                    Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
-                }
-            }
-        }
-        catch (OverflowException)
-        {
-            Console.WriteLine("Error: число превышает допустимый диапазон значений!");
-            Environment.Exit(1);
-        }
-        catch (FormatException)
-        {
-            Console.WriteLine("Error: введено нецелое число или неверный формат!");
-            Environment.Exit(1);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-            Environment.Exit(1);
-        }
     }
 
     /// <summary>

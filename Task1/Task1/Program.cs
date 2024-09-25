@@ -1,47 +1,26 @@
-﻿using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-using Task1.Exeptions;
+﻿using Task1.Exeptions;
 
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("Введите число: ");
-        string input = Console.ReadLine();
 
         try
         {
-            int number = int.Parse(input);
+            int number = int.Parse(Console.ReadLine());
 
             if (number < 0)
-            {                
-                throw new NotPositiveIntegerException();                
+            {
+                throw new NotPositiveIntegerException();
             }
 
-            if (IsEvenNumber(number))
-            {
-                Console.WriteLine($"Число {number} является четным");
-            }
-            else
-            {
-                Console.WriteLine($"Число {number} является нечетным");
-            }
+            string parity = IsEvenNumber(number) ? "четным" : "нечетным";
+            string primeOrComposite = IsPrimeNumber(number)
+            ? "простым"
+            : (number > 1 ? "составным" : "должно быть больше 1, чтобы быть простым или составным");
 
-            if (IsPrimeNumber(number))
-            {
-                Console.WriteLine($"Число {number} является простым");
-            }
-            else
-            {
-                if (number > 1)
-                {
-                    Console.WriteLine($"Число {number} является составным");
-                }
-                else
-                {
-                    Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
-                }
-            }
+            Console.WriteLine($"Число {number} является {parity} и {primeOrComposite} ");
         }
         catch (OverflowException)
         {
@@ -53,7 +32,7 @@ class Program
             Console.WriteLine(" Error: неверный формат ввода!");
             Environment.Exit(1);
         }
-        catch(NotPositiveIntegerException) 
+        catch (NotPositiveIntegerException)
         {
             Console.WriteLine(" Error: введено отрицательное число!");
             Environment.Exit(1);
@@ -81,7 +60,7 @@ class Program
             return false;
         if (number == 2)
             return true;
-        if (number % 2 == 0)
+        if (IsEvenNumber(number))
             return false;
 
         for (int i = 3; i <= Math.Sqrt(number); i += 2)

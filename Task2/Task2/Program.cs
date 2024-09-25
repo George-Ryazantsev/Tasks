@@ -9,8 +9,8 @@
         string input2 = Console.ReadLine();
         try
         {
-            int number1 = checked(int.Parse(input1));
-            int number2 = checked(int.Parse(input2));
+            int number1 = int.Parse(input1);
+            int number2 =int.Parse(input2);
 
             int nod = NOD(number1, number2);
             Console.WriteLine($"НОД чисел {number1} и {number2} = {nod}");
@@ -18,14 +18,14 @@
             int nok = NOK(number1, number2, nod);
             Console.WriteLine($"НОК чисел {number1} и {number2} = {nok}");
         }
-        catch (OverflowException)
-        {
-            Console.WriteLine("Error: превышение допустимого диапазона значений!");
+        catch (OverflowException ex)
+        {            
+            Console.WriteLine(ex.Message);
             Environment.Exit(1);
         }
-        catch (FormatException)
+        catch (FormatException ex)
         {
-            Console.WriteLine("Ошибка: введены нецелые числа или неверный формат!");
+            Console.WriteLine(ex.Message);
             Environment.Exit(1);
         }
     }

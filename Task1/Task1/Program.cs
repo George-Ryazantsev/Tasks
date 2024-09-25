@@ -8,44 +8,55 @@ class Program
     {
         Console.WriteLine("Введите число: ");
         string input = Console.ReadLine();
-        int number;
 
-        string pattern = @"^\d+$";
-        bool isOnlyDigits = Regex.IsMatch(input, pattern);
+        try
+        {
+            int number = int.Parse(input);
 
-        if (!isOnlyDigits)
-        {
-            throw new BadInputTypeException();
-        }
+            if (number < 0)
+            {                
+                throw new NotPositiveIntegerException();                
+            }
 
-        if (!int.TryParse(input, out number))
-        {
-            throw new OverFlowException();
-        }
-
-        if (IsEvenNumber(number))
-        {
-            Console.WriteLine($"Число {number} является четным");
-        }
-        else
-        {
-            Console.WriteLine($"Число {number} является нечетным");
-        }
-
-        if (IsPrimeNumber(number))
-        {
-            Console.WriteLine($"Число {number} является простым");
-        }
-        else
-        {
-            if (number > 1)
+            if (IsEvenNumber(number))
             {
-                Console.WriteLine($"Число {number} является составным");
+                Console.WriteLine($"Число {number} является четным");
             }
             else
             {
-                Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
+                Console.WriteLine($"Число {number} является нечетным");
             }
+
+            if (IsPrimeNumber(number))
+            {
+                Console.WriteLine($"Число {number} является простым");
+            }
+            else
+            {
+                if (number > 1)
+                {
+                    Console.WriteLine($"Число {number} является составным");
+                }
+                else
+                {
+                    Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
+                }
+            }
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine(" Error: число превышает допустимый диапазон значений!");
+            Environment.Exit(1);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine(" Error: неверный формат ввода!");
+            Environment.Exit(1);
+        }
+        catch(NotPositiveIntegerException) 
+        {
+            Console.WriteLine(" Error: введено отрицательное число!");
+            Environment.Exit(1);
         }
     }
 

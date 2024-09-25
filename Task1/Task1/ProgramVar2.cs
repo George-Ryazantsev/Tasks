@@ -1,51 +1,51 @@
 ﻿using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using Task1.Exeptions;
 
-class Program
+class ProgramVar2
 {
     static void Main(string[] args)
     {
         Console.WriteLine("Введите число: ");
         string input = Console.ReadLine();
-        int number;
 
-        string pattern = @"^\d+$";
-        bool isOnlyDigits = Regex.IsMatch(input, pattern);
+        try
+        {
+            int number = int.Parse(input);
 
-        if (!isOnlyDigits)
-        {
-            throw new BadInputTypeException();
-        }
-
-        if (!int.TryParse(input, out number))
-        {
-            throw new OverFlowException();
-        }
-
-        if (IsEvenNumber(number))
-        {
-            Console.WriteLine($"Число {number} является четным");
-        }
-        else
-        {
-            Console.WriteLine($"Число {number} является нечетным");
-        }
-
-        if (IsPrimeNumber(number))
-        {
-            Console.WriteLine($"Число {number} является простым");
-        }
-        else
-        {
-            if (number > 1)
+            if (IsEvenNumber(number))
             {
-                Console.WriteLine($"Число {number} является составным");
+                Console.WriteLine($"Число {number} является четным");
             }
             else
             {
-                Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
+                Console.WriteLine($"Число {number} является нечетным");
             }
+
+            if (IsPrimeNumber(number))
+            {
+                Console.WriteLine($"Число {number} является простым");
+            }
+            else
+            {
+                if (number > 1)
+                {
+                    Console.WriteLine($"Число {number} является составным");
+                }
+                else
+                {
+                    Console.WriteLine("Число должно быть больше 1, чтобы оно было простым или составным");
+                }
+            }
+        }
+        catch (OverflowException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Environment.Exit(1);
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Environment.Exit(1);
         }
     }
 

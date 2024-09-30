@@ -20,10 +20,10 @@ class Program
             builder.Append(IsEvenNumber(number) ? "четным и " : "нечетным и ");
 
             builder.Append(number > 1
-            ? (IsPrimeNumber(number) ? "простым" : "составным")
-            : "должно быть больше 1, чтобы быть простым или составным");
+                ? (IsPrimeNumber(number) ? "простым" : "составным")
+                : "должно быть больше 1, чтобы быть простым или составным");
 
-            Console.WriteLine(builder);
+            Console.WriteLine(builder.ToString());
         }
         catch (OverflowException)
         {

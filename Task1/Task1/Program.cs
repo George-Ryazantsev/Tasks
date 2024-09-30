@@ -17,10 +17,11 @@ class Program
             }
 
             StringBuilder builder = new StringBuilder($"Число {number} является ", 100);
-            builder.Append(IsEvenNumber(number) ? "четным и " : "нечетным и ")                         
-                         .Append(IsPrimeNumber(number) ? "простым"
-                         : (number > 1 ? "составным"
-                         : "должно быть больше 1, чтобы быть простым или составным"));
+            builder.Append(IsEvenNumber(number) ? "четным и " : "нечетным и ");
+
+            builder.Append(number > 1
+            ? (IsPrimeNumber(number) ? "простым" : "составным")
+            : "должно быть больше 1, чтобы быть простым или составным");
 
             Console.WriteLine(builder);
         }

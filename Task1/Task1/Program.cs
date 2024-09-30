@@ -22,7 +22,7 @@ class Program
                          : (number > 1 ? "составным"
                          : "должно быть больше 1, чтобы быть простым или составным"));
 
-            Console.WriteLine(builder.ToString());
+            Console.WriteLine(builder);
         }
         catch (OverflowException)
         {

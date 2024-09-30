@@ -1,4 +1,5 @@
-﻿using Task1.Exeptions;
+﻿using System.Text;
+using Task1.Exeptions;
 
 class Program
 {
@@ -15,12 +16,13 @@ class Program
                 throw new NotPositiveIntegerException();
             }
 
-            string parity = IsEvenNumber(number) ? "четным" : "нечетным";
-            string primeOrComposite = IsPrimeNumber(number)
-            ? "простым"
-            : (number > 1 ? "составным" : "должно быть больше 1, чтобы быть простым или составным");
+            StringBuilder builder = new StringBuilder($"Число {number} является ", 100);
+            builder.Append(IsEvenNumber(number) ? "четным и " : "нечетным и ")                         
+                         .Append(IsPrimeNumber(number) ? "простым"
+                         : (number > 1 ? "составным"
+                         : "должно быть больше 1, чтобы быть простым или составным"));
 
-            Console.WriteLine($"Число {number} является {parity} и {primeOrComposite} ");
+            Console.WriteLine(builder.ToString());
         }
         catch (OverflowException)
         {

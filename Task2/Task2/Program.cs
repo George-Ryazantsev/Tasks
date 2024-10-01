@@ -7,25 +7,24 @@
 
         Console.WriteLine("Введите второе число: ");
         string input2 = Console.ReadLine();
+
         try
         {
             int number1 = int.Parse(input1);
-            int number2 =int.Parse(input2);
+            int number2 = int.Parse(input2);
 
             int nod = NOD(number1, number2);
-            Console.WriteLine($"НОД чисел {number1} и {number2} = {nod}");
 
-            int nok = NOK(number1, number2, nod);
-            Console.WriteLine($"НОК чисел {number1} и {number2} = {nok}");
+            Console.WriteLine($" НОД и НОК чисел {number1} и {number2} : {nod} и " + NOK(number1, number2, nod));
         }
-        catch (OverflowException ex)
-        {            
-            Console.WriteLine(ex.Message);
+        catch (OverflowException)
+        {
+            Console.WriteLine(" Error: одно или оба из чисел превышают допустимый диапазон значений!");
             Environment.Exit(1);
         }
-        catch (FormatException ex)
+        catch (FormatException)
         {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine(" Error: неверный формат ввода!");
             Environment.Exit(1);
         }
     }

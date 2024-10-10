@@ -6,8 +6,11 @@
         string input1 = Console.ReadLine();
 
         Console.WriteLine("Введите второе число: ");
-        string input2 = Console.ReadLine();
+        string input2 =   Console.ReadLine();
 
+
+
+ 
         try
         {
             int number1 = int.Parse(input1);

@@ -1,32 +1,62 @@
-﻿class Program
+﻿using Task2.Exeptions;
+
+class Program
 {
     static void Main()
     {
-        Console.WriteLine("Введите первое число: ");
-        string input1 = Console.ReadLine();
-
-        Console.WriteLine("Введите второе число: ");
-        string input2 = Console.ReadLine();
- 
         try
         {
-            int number1 = int.Parse(input1);
-            int number2 = int.Parse(input2);
+            Console.WriteLine("Введите первое число: ");
+            int number1 = IsValidNumber(Console.ReadLine(), "первое");
+
+            Console.WriteLine("Введите второе число: ");
+            int number2 = IsValidNumber(Console.ReadLine(), "второе");
+
+            if (number1 < 0 | number2 < 0)
+            {
+                throw new NotPositiveIntegerException();
+            }
 
             int nod = NOD(number1, number2);
 
-            Console.WriteLine($" НОД и НОК чисел {number1} и {number2} : {nod} и " + NOK(number1, number2, nod));
+            Console.WriteLine($"НОД и НОК чисел {number1} и {number2} : {nod} и " + NOK(number1, number2, nod));
         }
-        catch (OverflowException)
+        catch (NotPositiveIntegerException)
         {
-            Console.WriteLine(" Error: одно или оба из чисел превышают допустимый диапазон значений!");
+            Console.WriteLine("Error: введено отрицательное число!");
             Environment.Exit(1);
+        }       
+    }
+
+    /// <summary>
+    /// Checks if the entered string is a valid number. In case of invalid input,
+    /// prints an error message and terminates the program.
+    /// </summary>
+    /// <param name="input">The string containing the input number.</param>
+    /// <param name="numberPosition">The position of the number (e.g., "first" or "second"), used to indicate which number is invalid.</param>
+    /// <returns>Returns the parsed integer if the input is valid, or terminates the program in case of an error.</returns>
+    /// <exception cref="FormatException">Thrown when the input is not a valid number format.</exception>
+    /// <exception cref="OverflowException">Thrown when the input number exceeds the allowed range of values.</exception>
+    private static int IsValidNumber(string? input, string numberPosition)
+    {
+        try
+        {
+            int number = int.Parse(input);
+
+            return number;
         }
         catch (FormatException)
         {
-            Console.WriteLine(" Error: неверный формат ввода!");
+            Console.WriteLine($"Error: Неверный формат ввода для {numberPosition} числа!");
             Environment.Exit(1);
         }
+        catch (OverflowException)
+        {
+            Console.WriteLine($"Error: {numberPosition} число превышает допустимый диапазон значений!");
+            Environment.Exit(1);
+        }
+
+        return -1;
     }
 
     /// <summary>

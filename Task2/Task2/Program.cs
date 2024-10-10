@@ -4,28 +4,16 @@ class Program
 {
     static void Main()
     {
-        try
-        {
-            Console.WriteLine("Введите первое число: ");
-            int number1 = IsValidNumber(Console.ReadLine(), "первое");
+        Console.WriteLine("Введите первое число: ");
+        int number1 = IsValidNumber(Console.ReadLine(), "первое");
 
-            Console.WriteLine("Введите второе число: ");
-            int number2 = IsValidNumber(Console.ReadLine(), "второе");
+        Console.WriteLine("Введите второе число: ");
+        int number2 = IsValidNumber(Console.ReadLine(), "второе");
 
-            if (number1 < 0 | number2 < 0)
-            {
-                throw new NotPositiveIntegerException();
-            }
+        int nod = NOD(number1, number2);
+        int nok = NOK(number1, number2, nod);
 
-            int nod = NOD(number1, number2);
-
-            Console.WriteLine($"НОД и НОК чисел {number1} и {number2} : {nod} и " + NOK(number1, number2, nod));
-        }
-        catch (NotPositiveIntegerException)
-        {
-            Console.WriteLine("Error: введено отрицательное число!");
-            Environment.Exit(1);
-        }       
+        Console.WriteLine($"НОД и НОК чисел {number1} и {number2} : {nod} и " + nok);
     }
 
     /// <summary>
@@ -37,11 +25,17 @@ class Program
     /// <returns>Returns the parsed integer if the input is valid, or terminates the program in case of an error.</returns>
     /// <exception cref="FormatException">Thrown when the input is not a valid number format.</exception>
     /// <exception cref="OverflowException">Thrown when the input number exceeds the allowed range of values.</exception>
+    /// <exception cref="NotPositiveIntegerException">Thrown when the input is a negative integer.</exception>
     private static int IsValidNumber(string? input, string numberPosition)
     {
         try
         {
             int number = int.Parse(input);
+
+            if (number < 0)
+            {
+                throw new NotPositiveIntegerException();
+            }
 
             return number;
         }
@@ -53,6 +47,11 @@ class Program
         catch (OverflowException)
         {
             Console.WriteLine($"Error: {numberPosition} число превышает допустимый диапазон значений!");
+            Environment.Exit(1);
+        }
+        catch (NotPositiveIntegerException)
+        {
+            Console.WriteLine("Error: Введено отрицательное число!");
             Environment.Exit(1);
         }
 

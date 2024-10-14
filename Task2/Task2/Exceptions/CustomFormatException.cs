@@ -8,6 +8,12 @@ namespace Task2.Exceptions
 {
     internal class CustomFormatException : Exception
     {
-        public CustomFormatException(string message) : base(message) { }
+        public string NumberPosition { get; }
+
+        public CustomFormatException(string message, string numberPosition, Exception innerException)
+            : base(message, innerException)
+        {
+            NumberPosition = numberPosition;
+        }
     }
 }

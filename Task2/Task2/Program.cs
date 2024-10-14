@@ -31,11 +31,13 @@ class Program
         }
         catch (CustomFormatException ex)
         {
+            Console.WriteLine($"Original Exception: {ex.InnerException?.Message}");
             Console.WriteLine(ex.Message);
             Environment.Exit(1);
         }
         catch (CustomOverflowException ex)
         {
+            Console.WriteLine($"Original Exception: {ex.InnerException?.Message}");
             Console.WriteLine(ex.Message);
             Environment.Exit(1);
         }
@@ -66,13 +68,13 @@ class Program
 
             return number;
         }
-        catch (FormatException)
+        catch (FormatException ex)
         {
-            throw new CustomFormatException($"Error: Неверный формат ввода для {numberPosition} числа!");
+            throw new CustomFormatException($"Error: Неверный формат ввода для {numberPosition} числа!", numberPosition, ex);
         }
-        catch (OverflowException)
+        catch (OverflowException ex)
         {
-            throw new CustomOverflowException($"Error: {numberPosition} число превышает допустимый диапазон значений!");
+            throw new CustomOverflowException($"Error: {numberPosition} число превышает допустимый диапазон значений!", numberPosition, ex);
         }
         catch (NotPositiveIntegerException)
         {

@@ -8,6 +8,12 @@ namespace Task2.Exceptions
 {
     internal class CustomOverflowException : Exception
     {
-        public CustomOverflowException(string message) : base(message) { }
+        public string NumberPosition { get; }
+
+        public CustomOverflowException(string message, string numberPosition, Exception innerException)
+            : base(message, innerException)
+        {
+            NumberPosition = numberPosition;
+        }
     }
 }

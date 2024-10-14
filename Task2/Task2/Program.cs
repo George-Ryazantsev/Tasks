@@ -1,19 +1,46 @@
-﻿using Task2.Exeptions;
+﻿using Task2.Exceptions;
+using Task2.Exeptions;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine("Введите первое число: ");
-        int number1 = IsValidNumber(Console.ReadLine(), "первое");
-
-        Console.WriteLine("Введите второе число: ");
-        int number2 = IsValidNumber(Console.ReadLine(), "второе");
+        int number1 = RequestNumber("первое");
+        int number2 = RequestNumber("второе");
 
         int nod = NOD(number1, number2);
         int nok = NOK(number1, number2, nod);
 
-        Console.WriteLine($"НОД и НОК чисел {number1} и {number2} : {nod} и " + nok);
+        Console.WriteLine($"НОД чисел {number1} и {number2} : {nod}");
+        Console.WriteLine($"НОК чисел {number1} и {number2} : {nok}");
+    }
+
+    /// <summary>
+    /// Prompts the user to enter a number for a given position, validates the input
+    /// and returns the parsed integer value.
+    /// </summary>
+    /// <param name="numberPosition">The label of the number position used for display in prompts and error messages.</param>
+    /// <returns>The validated integer number entered by the user.</returns>
+    private static int RequestNumber(string numberPosition)
+    {
+        Console.WriteLine($"Введите {numberPosition} число: ");
+
+        try
+        {
+            return IsValidNumber(Console.ReadLine(), numberPosition);
+        }
+        catch (CustomFormatException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Environment.Exit(1);
+        }
+        catch (CustomOverflowException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Environment.Exit(1);
+        }
+
+        return -1;
     }
 
     /// <summary>
@@ -41,13 +68,11 @@ class Program
         }
         catch (FormatException)
         {
-            Console.WriteLine($"Error: Неверный формат ввода для {numberPosition} числа!");
-            Environment.Exit(1);
+            throw new CustomFormatException($"Error: Неверный формат ввода для {numberPosition} числа!");
         }
         catch (OverflowException)
         {
-            Console.WriteLine($"Error: {numberPosition} число превышает допустимый диапазон значений!");
-            Environment.Exit(1);
+            throw new CustomOverflowException($"Error: {numberPosition} число превышает допустимый диапазон значений!");
         }
         catch (NotPositiveIntegerException)
         {

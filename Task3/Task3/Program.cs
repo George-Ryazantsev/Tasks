@@ -18,9 +18,6 @@ class Program
         }
     }
 
-
-аа и
-
     /// <summary>
     /// Converts the first letter of the given word to uppercase, and the rest to lowercase.
     /// </summary>

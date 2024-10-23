@@ -28,7 +28,7 @@ class Program
         if (string.IsNullOrEmpty(word))
             return word;
 
-        return char.ToUpper(word[0]) + word.Substring(1).ToLower();
+        return char.ToUpper(word[0]) + word.Substring(1);
     }
 
     /// <summary>

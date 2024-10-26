@@ -255,6 +255,12 @@ paket-files/
 
 # CodeRush
 .cr/
+# MyBadFiles
+Task2/Task2.sln
+Task2/Task2/Exceptions/CustomFormatException.cs
+Task2/Task2/Exceptions/CustomOverflowException.cs
+Task2/Task2/Exceptions/NotPositiveIntegerException.cs
+Task2/Task2/Program.cs
 
 # Python Tools for Visual Studio (PTVS)
 __pycache__/

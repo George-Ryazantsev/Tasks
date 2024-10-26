@@ -261,7 +261,7 @@ Task2/Task2/Exceptions/CustomFormatException.cs
 Task2/Task2/Exceptions/CustomOverflowException.cs
 Task2/Task2/Exceptions/NotPositiveIntegerException.cs
 Task2/Task2/Program.cs
-
+Task1/Task1.sln
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc

@@ -14,8 +14,8 @@ namespace WordCounterLibrary
 
             Array.Sort(capitalizedWords, (word1, word2) =>
             {
-                int lengthComparison = word1.Length.CompareTo(word2.Length);
-                return lengthComparison == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthComparison;
+                int lengthCompare = word1.Length.CompareTo(word2.Length);
+                return lengthCompare == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthCompare;
             });
 
             Console.WriteLine("Слова в отсортированном виде:");

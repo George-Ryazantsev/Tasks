@@ -2,13 +2,14 @@
 
 namespace WordCounterLibrary
 {
-    class Program
+    public class WordCounter
     {
-        static void Main()
+        /// <summary>
+        /// This method counts words, sorts them, and returns them in a capitalized format.
+        /// </summary>
+        /// <param name="input">Input sentence for processing.</param>
+        public void Count(string input)
         {
-            Console.WriteLine("Введите предложение:");
-            string input = Console.ReadLine();
-
             string[] capitalizedWords = RegexActions(input).Select(word => ToUpper(word)).ToArray();
 
             Array.Sort(capitalizedWords, StringComparer.CurrentCultureIgnoreCase);
@@ -49,5 +50,6 @@ namespace WordCounterLibrary
 
             return words;
         }
+
     }
 }

@@ -2,13 +2,13 @@
 
 namespace WordCounterLibrary
 {
-    public class WordCounter
+    public static class WordCounter
     {
         /// <summary>
         /// This method counts words, sorts them, and returns them in a capitalized format.
         /// </summary>
         /// <param name="input">Input sentence for processing.</param>
-        public void Count(string input)
+        public static void Count(string input)
         {
             string[] capitalizedWords = RegexActions(input).Select(word => ToUpper(word)).ToArray();
 

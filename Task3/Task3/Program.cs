@@ -7,7 +7,6 @@ class Program
         Console.WriteLine("Введите предложение:");
         string input = Console.ReadLine();
 
-        WordCounter wordCounter = new WordCounter();
-        wordCounter.Count(input);        
+        WordCounter.Count(input);                
     }
 }

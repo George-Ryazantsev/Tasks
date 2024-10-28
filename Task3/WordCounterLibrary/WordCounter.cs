@@ -12,7 +12,11 @@ namespace WordCounterLibrary
         {
             string[] capitalizedWords = RegexActions(input).Select(word => ToUpper(word)).ToArray();
 
-            Array.Sort(capitalizedWords, StringComparer.CurrentCultureIgnoreCase);
+            Array.Sort(capitalizedWords, (word1, word2) =>
+            {
+                int lengthComparison = word1.Length.CompareTo(word2.Length);
+                return lengthComparison == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthComparison;
+            });
 
             Console.WriteLine("Слова в отсортированном виде:");
             foreach (string word in capitalizedWords)

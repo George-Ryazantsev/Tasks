@@ -58,11 +58,30 @@ namespace WordCounterLibrary
         {
             public int Compare(string word1, string word2)
             {
-                int lengthComparison = word1.Length.CompareTo(word2.Length);
+                if (word1 == null && word2 == null) return 0;
+                if (word1 == null) return -1;
+                if (word2 == null) return 1;
 
-                return lengthComparison == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthComparison;
+                int lengthDifference = GetLengthDifference(word1, word2);
+
+                return lengthDifference != 0 ? lengthDifference : CompareAlphabetically(word1, word2);
+            }
+            private int CompareAlphabetically(string letter1, string letter2)
+            {
+                int minLength = Math.Min(letter1.Length, letter2.Length);
+
+                for (int i = 0; i < minLength; i++)
+                {
+                    if (letter1[i] < letter2[i]) return -1;
+                    if (letter1[i] > letter2[i]) return 1;
+                }
+
+                return letter1.Length < letter2.Length ? -1 : (letter1.Length > letter2.Length ? 1 : 0);
+            }
+            private int GetLengthDifference(string letter1, string letter2)
+            {
+                return letter1.Length < letter2.Length ? -1 : (letter1.Length > letter2.Length ? 1 : 0);
             }
         }
-
     }
 }

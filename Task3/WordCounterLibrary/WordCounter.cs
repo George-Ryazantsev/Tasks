@@ -59,6 +59,7 @@ namespace WordCounterLibrary
             public int Compare(string word1, string word2)
             {
                 int lengthComparison = word1.Length.CompareTo(word2.Length);
+
                 return lengthComparison == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthComparison;
             }
         }

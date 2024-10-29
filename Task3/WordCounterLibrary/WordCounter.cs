@@ -12,11 +12,7 @@ namespace WordCounterLibrary
         {
             string[] capitalizedWords = RegexActions(input).Select(word => ToUpper(word)).ToArray();
 
-            Array.Sort(capitalizedWords, (word1, word2) =>
-            {
-                int lengthCompare = word1.Length.CompareTo(word2.Length);
-                return lengthCompare == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthCompare;
-            });
+            Array.Sort(capitalizedWords, new WordLengthComparer());
 
             Console.WriteLine("Слова в отсортированном виде:");
             foreach (string word in capitalizedWords)
@@ -53,6 +49,18 @@ namespace WordCounterLibrary
             Console.WriteLine($"Количество слов в предложении: {wordCount}");
 
             return words;
+        }
+
+        /// <summary>
+        /// A class for comparing strings by length for sorting.
+        /// </summary>
+        public class WordLengthComparer : IComparer<string>
+        {
+            public int Compare(string word1, string word2)
+            {
+                int lengthComparison = word1.Length.CompareTo(word2.Length);
+                return lengthComparison == 0 ? string.Compare(word1, word2, StringComparison.CurrentCultureIgnoreCase) : lengthComparison;
+            }
         }
 
     }

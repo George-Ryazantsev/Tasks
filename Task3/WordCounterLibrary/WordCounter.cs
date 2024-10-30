@@ -63,7 +63,7 @@ namespace WordCounterLibrary
                     throw new ArgumentException("Некорректное значение параметра");
                 }
 
-                return word2.Length - word2.Length;
+                return word1.Length - word2.Length;
             }
         }
     }

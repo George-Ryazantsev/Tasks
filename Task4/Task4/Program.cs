@@ -1,9 +1,12 @@
-﻿class Program
+﻿using System.Text.RegularExpressions;
+using Task4;
+
+class Program
 {
     /// <summary>
     /// Main method that reads a text and a search word from the user, then calculates how many times the search word appears in the text, ignoring case.
     /// </summary>
-    static async Task Main()
+    static void Main()
     {
         Console.WriteLine("Введите текст:");
         string input = Console.ReadLine();
@@ -11,29 +14,22 @@
         Console.WriteLine("Введите слово для поиска:");
         string searchWord = Console.ReadLine();
 
-        int wordCount = await FindWordAsync(input, searchWord);
-        Console.WriteLine($"Слово \"{searchWord}\" встречается в тексте {wordCount} раз(а)");
+        int wordCount = FindWord(input, searchWord);
+
+        string message = string.Format(Messages.WordOccurrenceMessage, searchWord, wordCount);
+        Console.WriteLine(message);
     }
 
     /// <summary>
-    /// Asynchronous method that counts the occurrences of a search word in the text, ignoring case.
+    /// Method that counts the occurrences of a search word in the text, ignoring case.
     /// </summary>    
     /// <param name="searchWord">Search word</param>
     /// <returns>The number of occurrences of the search word</returns>
-    static async Task<int> FindWordAsync(string inputText, string searchWord)
+    private static int FindWord(string inputText, string searchWord)
     {
-        string lowText = inputText.ToLower();
-        string lowWord = searchWord.ToLower();
+        string pattern = $@"\b{Regex.Escape(searchWord)}\b";
+        MatchCollection matches = Regex.Matches(inputText, pattern, RegexOptions.IgnoreCase);
 
-        int wordCount = 0;
-        int index = lowText.IndexOf(lowWord);
-
-        while (index != -1)
-        {
-            wordCount++;
-            index = lowText.IndexOf(lowWord, index + lowWord.Length);
-        }
-
-        return wordCount;
+        return matches.Count;
     }
 }

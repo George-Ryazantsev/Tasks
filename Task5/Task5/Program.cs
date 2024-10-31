@@ -1,9 +1,12 @@
 ﻿class Program
 {
+    delegate bool PalindromeCheck(int number);
     static void Main()
     {
         Console.WriteLine("Введите число :");
         string input = Console.ReadLine();
+
+        PalindromeCheck checkPalindrome = IsPalindrome;
 
         if (int.TryParse(input, out int k) && k >= 0 && k <= 100)
         {
@@ -11,7 +14,7 @@
 
             for (int i = 0; i <= k; i++)
             {
-                if (IsPalindrome(i))
+                if (checkPalindrome(i))
                 {
                     Console.WriteLine(i);
                 }
@@ -21,7 +24,7 @@
         {
             Console.WriteLine(" Ошибка ввода!");
             Environment.Exit(1);
-        }
+        }      
     }
 
     /// <summary>

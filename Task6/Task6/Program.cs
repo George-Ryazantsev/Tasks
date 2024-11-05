@@ -2,6 +2,7 @@
 {
     public int Weight { get; set; }
     public int Value { get; set; }
+    public string Object { get; set; }
 }
 public class Program
 {
@@ -13,10 +14,10 @@ public class Program
         // набор вещей 
         BackpackItem[] items = new BackpackItem[]
         {
-            new BackpackItem { Weight = 10, Value = 60 },
-            new BackpackItem { Weight = 20, Value = 80 },
-            new BackpackItem { Weight = 30, Value = 100 },
-            new BackpackItem { Weight = 40, Value = 120 }
+            new BackpackItem { Weight = 10, Value = 60, Object = "book" },
+            new BackpackItem { Weight = 20, Value = 80, Object = "phone" },
+            new BackpackItem { Weight = 30, Value = 100, Object = "keys" },
+            new BackpackItem { Weight = 40, Value = 120, Object = "wallet" }
         };
 
         int maxValue = AddToBackpack(maxWeight, items);
